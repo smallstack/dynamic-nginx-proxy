@@ -1,5 +1,7 @@
 FROM nginx
-ADD nginx.conf /etc/nginx/nginx.conf.tmpl
-RUN envsubst < /etc/nginx/nginx.conf.tmpl > /etc/nginx/nginx.conf
 
+ENV WORKING_DIRECTORY /opt/work 
+ADD nginx.conf $WORKING_DIRECTORY
+ADD run.sh $WORKING_DIRECTORY
 
+ENTRYPOINT bash $WORKING_DIRECTORY/replace_env_and_run.sh
