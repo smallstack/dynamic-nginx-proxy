@@ -1,8 +1,7 @@
 FROM nginx
 
-ENV WORKING_DIRECTORY /opt/work 
 RUN mkdir -p /opt/work
-ADD nginx.conf $WORKING_DIRECTORY
-ADD replace_env_and_run.sh $WORKING_DIRECTORY
+COPY nginx.conf /opt/work
+COPY replace_env_and_run.sh /opt/work/replace_env_and_run.sh
 
-ENTRYPOINT bash $WORKING_DIRECTORY/replace_env_and_run.sh
+ENTRYPOINT bash /opt/work/replace_env_and_run.sh
